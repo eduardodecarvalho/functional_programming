@@ -9,7 +9,7 @@ public class Product {
 	public Product(Integer id, String name, Double price) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.name = name.trim();
 		this.price = price;
 	}
 	public Integer getId() {
@@ -22,7 +22,7 @@ public class Product {
 		return name;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.name = name.trim();
 	}
 	public Double getPrice() {
 		return price;
