@@ -36,7 +36,7 @@ class FunctionalProgrammingApplicationTests {
 
 	@Test
 	void checkPairs() {
-//		Challenge from HackerRank.
+//		Challenge from HackerRank.:  It must return an integer representing the number of matching pairs
 
 		final List<Integer> list = Arrays.asList(1, 6, 4, 3, 7, 8, 6, 5, 1, 1, 3, 4 ,5);
 
