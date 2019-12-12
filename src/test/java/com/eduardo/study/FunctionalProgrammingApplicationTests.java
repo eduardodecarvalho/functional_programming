@@ -3,7 +3,10 @@ package com.eduardo.study;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,4 +34,14 @@ class FunctionalProgrammingApplicationTests {
 		
 	}
 
+	@Test
+	void checkPairs() {
+//		Challenge from HackerRank.
+
+		final List<Integer> list = Arrays.asList(1, 6, 4, 3, 7, 8, 6, 5, 1, 1, 3, 4 ,5);
+
+        final Map<Object, Long> verifyDuplicatedList = list.stream().collect    (Collectors.groupingBy(k -> k, Collectors.counting()));
+        final long result = verifyDuplicatedList.values().stream().mapToLong(v -> v / 2).sum();
+        assertEquals(5, result);
+	}
 }
