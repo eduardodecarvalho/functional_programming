@@ -44,4 +44,22 @@ class FunctionalProgrammingApplicationTests {
         final long result = verifyDuplicatedList.values().stream().mapToLong(v -> v / 2).sum();
         assertEquals(5, result);
 	}
+	
+
+	@Test
+	void removeIf() {
+		List<Product> products = new ArrayList<>();
+
+		products.add(new Product(1, "       TV", 1000.00));
+		products.add(new Product(2, "Mouse", 1500.00));
+		products.add(new Product(3, "Computer", 2000.00));
+		products.add(new Product(4, "   Camera", 1750.00));
+		products.add(new Product(5, "Notebook", 3500.00));
+		products.add(new Product(6, "Cellphone", 900.00));
+		
+		products.removeIf(p -> p.getPrice() >= 1500);
+
+		assertEquals(2, products.size());
+		
+	}
 }
