@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ class FunctionalProgrammingApplicationTests {
 
 		final List<Integer> list = Arrays.asList(1, 6, 4, 3, 7, 8, 6, 5, 1, 1, 3, 4 ,5);
 
-        final Map<Object, Long> verifyDuplicatedList = list.stream().collect    (Collectors.groupingBy(k -> k, Collectors.counting()));
+        final Map<Object, Long> verifyDuplicatedList = list.stream().collect(Collectors.groupingBy(k -> k, Collectors.counting()));
         final long result = verifyDuplicatedList.values().stream().mapToLong(v -> v / 2).sum();
         assertEquals(5, result);
 	}
@@ -61,5 +62,47 @@ class FunctionalProgrammingApplicationTests {
 
 		assertEquals(2, products.size());
 		
+	}
+	
+	@Test
+	void forEach() {
+		List<Product> products = new ArrayList<>();
+		
+		products.add(new Product(1, "       TV", 1000.00));
+		products.add(new Product(2, "Mouse", 1500.00));
+		products.add(new Product(3, "Computer", 2000.00));
+		products.add(new Product(4, "   Camera", 1750.00));
+		products.add(new Product(5, "Notebook", 3500.00));
+		products.add(new Product(6, "Cellphone", 900.00));
+		
+		products.stream().forEach(p -> p.setPrice(p.getPrice() * 1.1));
+
+		assertEquals(1100.00, products.get(0).getPrice());
+
+		Double totalPrice = products.stream().mapToDouble(p -> p.getPrice()).sum();
+		
+		assertEquals(11715.000000000002, totalPrice);
+		
+		products.stream().forEach(p -> p.setName(p.getName().toUpperCase()));
+
+		assertEquals(products.get(1).getName(), "MOUSE");
+	}
+	
+	@Test
+	void map() {
+		List<Product> products = new ArrayList<>();
+		
+		products.add(new Product(1, "       TV", 1000.00));
+		products.add(new Product(2, "Mouse", 1500.00));
+		products.add(new Product(3, "Computer", 2000.00));
+		products.add(new Product(4, "   Camera", 1750.00));
+		products.add(new Product(5, "Notebook", 3500.00));
+		products.add(new Product(6, "Cellphone", 900.00));
+
+		List<String> names = products.stream().map(p -> p.getName().toUpperCase()).collect(Collectors.toList());
+		
+		List<String> expected = Arrays.asList("TV", "MOUSE", "COMPUTER", "CAMERA", "NOTEBOOK", "CELLPHONE");
+
+		assertEquals(expected, names);
 	}
 }
