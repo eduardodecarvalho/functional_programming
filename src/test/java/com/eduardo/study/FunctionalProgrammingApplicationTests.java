@@ -2,37 +2,32 @@ package com.eduardo.study;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.eduardo.study.model.Product;
+import com.eduardo.study.service.ProductService;
 
 @SpringBootTest
 class FunctionalProgrammingApplicationTests {
 
+	@Autowired
+	private ProductService productService;
+
 	@Test
 	void orderProductsByName() {
-		List<Product> products = new ArrayList<>();
-
-		products.add(new Product(1, "       TV", 1000.00));
-		products.add(new Product(2, "Mouse", 1500.00));
-		products.add(new Product(3, "Computer", 2000.00));
-		products.add(new Product(4, "   Camera", 1750.00));
-		products.add(new Product(5, "Notebook", 3500.00));
-		products.add(new Product(6, "Cellphone", 900.00));
+		List<Product> products = productService.populateList();
 		
 		products.sort((p1, p2) -> p1.getName().toUpperCase()
 				.compareTo(p2.getName().toUpperCase()));
 
 		assertEquals("Camera", products.get(0).getName());
-		
 	}
 
 	@Test
@@ -48,15 +43,8 @@ class FunctionalProgrammingApplicationTests {
 	
 
 	@Test
-	void removeIf() {
-		List<Product> products = new ArrayList<>();
-
-		products.add(new Product(1, "       TV", 1000.00));
-		products.add(new Product(2, "Mouse", 1500.00));
-		products.add(new Product(3, "Computer", 2000.00));
-		products.add(new Product(4, "   Camera", 1750.00));
-		products.add(new Product(5, "Notebook", 3500.00));
-		products.add(new Product(6, "Cellphone", 900.00));
+	void removeIf() {		
+		List<Product> products = productService.populateList();
 		
 		products.removeIf(p -> p.getPrice() >= 1500);
 
@@ -66,15 +54,8 @@ class FunctionalProgrammingApplicationTests {
 	
 	@Test
 	void forEach() {
-		List<Product> products = new ArrayList<>();
-		
-		products.add(new Product(1, "       TV", 1000.00));
-		products.add(new Product(2, "Mouse", 1500.00));
-		products.add(new Product(3, "Computer", 2000.00));
-		products.add(new Product(4, "   Camera", 1750.00));
-		products.add(new Product(5, "Notebook", 3500.00));
-		products.add(new Product(6, "Cellphone", 900.00));
-		
+		List<Product> products = productService.populateList();
+
 		products.stream().forEach(p -> p.setPrice(p.getPrice() * 1.1));
 
 		assertEquals(1100.00, products.get(0).getPrice());
@@ -90,14 +71,7 @@ class FunctionalProgrammingApplicationTests {
 	
 	@Test
 	void map() {
-		List<Product> products = new ArrayList<>();
-		
-		products.add(new Product(1, "       TV", 1000.00));
-		products.add(new Product(2, "Mouse", 1500.00));
-		products.add(new Product(3, "Computer", 2000.00));
-		products.add(new Product(4, "   Camera", 1750.00));
-		products.add(new Product(5, "Notebook", 3500.00));
-		products.add(new Product(6, "Cellphone", 900.00));
+		List<Product> products = productService.populateList();
 
 		List<String> names = products.stream().map(p -> p.getName().toUpperCase()).collect(Collectors.toList());
 		
