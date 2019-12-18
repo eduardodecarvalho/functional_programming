@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +79,15 @@ class FunctionalProgrammingApplicationTests {
 		List<String> expected = Arrays.asList("TV", "MOUSE", "COMPUTER", "CAMERA", "NOTEBOOK", "CELLPHONE");
 
 		assertEquals(expected, names);
+	}
+	
+	@Test
+	void fibonacciSequence() {
+		Stream<Integer> s = Stream.iterate(new Integer[] {0, 1}, 
+				p -> new Integer[] {p[1], p[0]+p[1]}).map(p -> p[0]);
+		
+		String fibonacciSequence = "[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]";
+		
+		assertEquals(fibonacciSequence, Arrays.toString(s.limit(10).toArray()));
 	}
 }
