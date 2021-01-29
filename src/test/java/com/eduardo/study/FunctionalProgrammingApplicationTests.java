@@ -3,7 +3,9 @@ package com.eduardo.study;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,6 +29,8 @@ class FunctionalProgrammingApplicationTests {
 		List<Product> products = productService.populateList();
 
 		products.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
+		products.sort((p1, p2) -> p1.getName().toUpperCase()
+				.compareTo(p2.getName().toUpperCase()));
 
 		assertEquals("Camera", products.get(0).getName());
 	}
@@ -42,6 +46,7 @@ class FunctionalProgrammingApplicationTests {
 		final long result = verifyDuplicatedList.values().stream().mapToLong(v -> v / 2).sum();
 		assertEquals(5, result);
 	}
+
 
 	@Test
 	void removeIf() {
@@ -83,8 +88,8 @@ class FunctionalProgrammingApplicationTests {
 
 	@Test
 	void fibonacciSequence() {
-		Stream<Integer> s = Stream.iterate(new Integer[] { 0, 1 }, p -> new Integer[] { p[1], p[0] + p[1] })
-				.map(p -> p[0]);
+		Stream<Integer> s = Stream.iterate(new Integer[]{0, 1},
+				p -> new Integer[]{p[1], p[0] + p[1]}).map(p -> p[0]);
 
 		String fibonacciSequence = "[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]";
 
@@ -139,4 +144,36 @@ class FunctionalProgrammingApplicationTests {
 		products.stream().forEach(product -> System.out.println(product));
 		
 	}
+
+	void twoSum() {
+		// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+		// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+		// You can return the answer in any order.
+		int[] nums = {1, 3, 5, 7};
+		int target = 12;
+		List<Integer> actual = new ArrayList();
+
+		Map<Integer, Integer> map = new HashMap();
+
+		for (int i = 0; i < nums.length; i++) {
+			int complement = target - nums[i];
+			if (map.containsKey(complement)) {
+				actual.add(map.get(complement));
+				actual.add(i);
+				break;
+			}
+			map.put(nums[i], i);
+		}
+
+		List<Integer> expected = new ArrayList<Integer>() {
+			{
+				add(2);
+				add(3);
+			}
+		};
+
+		assertTrue(actual.containsAll(expected));
+	}
+
 }
+
