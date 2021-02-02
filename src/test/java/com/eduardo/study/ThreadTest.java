@@ -1,10 +1,13 @@
 package com.eduardo.study;
 
+import java.util.stream.IntStream;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.eduardo.study.model.ThreadExtendsThread;
 import com.eduardo.study.model.ThreadImplementsRunnable;
+import com.eduardo.study.service.ThreadService;
 
 @SpringBootTest
 public class ThreadTest {
@@ -25,5 +28,22 @@ public class ThreadTest {
 
 		firstThread.run();
 		secondeThread.run();
+	}
+
+	@Test
+	void forEachXParallel() {
+		Long startForEach = System.currentTimeMillis();
+		int firstNumber = 1;
+		int lastNumber = 1000000;
+
+		IntStream.range(firstNumber, lastNumber).forEach(num -> ThreadService.factorial(Long.valueOf(num)));
+		Long endForEach = System.currentTimeMillis();
+		System.out.println("Time: " + (endForEach - startForEach));
+
+		Long startParallel = System.currentTimeMillis();
+		IntStream.range(firstNumber, lastNumber).parallel().forEach(num -> ThreadService.factorial(Long.valueOf(num)));
+		Long endParallel = System.currentTimeMillis();
+		System.out.println("Time: " + (endParallel - startParallel));
+
 	}
 }
