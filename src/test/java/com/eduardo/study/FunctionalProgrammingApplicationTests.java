@@ -1,17 +1,22 @@
 package com.eduardo.study;
 
-import com.eduardo.study.model.Product;
-import com.eduardo.study.service.ProductService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.eduardo.study.model.Product;
+import com.eduardo.study.service.ProductService;
 
 @SpringBootTest
 class FunctionalProgrammingApplicationTests {
@@ -23,6 +28,7 @@ class FunctionalProgrammingApplicationTests {
 	void orderProductsByName() {
 		List<Product> products = productService.populateList();
 
+		products.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
 		products.sort((p1, p2) -> p1.getName().toUpperCase()
 				.compareTo(p2.getName().toUpperCase()));
 
@@ -35,7 +41,8 @@ class FunctionalProgrammingApplicationTests {
 
 		final List<Integer> list = Arrays.asList(1, 6, 4, 3, 7, 8, 6, 5, 1, 1, 3, 4, 5);
 
-		final Map<Object, Long> verifyDuplicatedList = list.stream().collect(Collectors.groupingBy(k -> k, Collectors.counting()));
+		final Map<Object, Long> verifyDuplicatedList = list.stream()
+				.collect(Collectors.groupingBy(k -> k, Collectors.counting()));
 		final long result = verifyDuplicatedList.values().stream().mapToLong(v -> v / 2).sum();
 		assertEquals(5, result);
 	}
@@ -90,6 +97,54 @@ class FunctionalProgrammingApplicationTests {
 	}
 
 	@Test
+	void testLetters() {
+		String word = "Google";
+		boolean result = false;
+
+		if (word.equals(word.toUpperCase())) {
+			result = true;
+		}
+		if (word.equals(word.toLowerCase())) {
+			result = true;
+		}
+		String firstLetter = "" + word.charAt(0);
+		if (firstLetter.equals(firstLetter.toUpperCase())) {
+			String subWord = "";
+			for (int j = 1; j < word.length(); j++) {
+				subWord = subWord.concat("" + word.charAt(j));
+				System.out.println(subWord);
+			}
+			if (subWord.equals(subWord.toLowerCase())) {
+				result = true;
+			}
+		}
+		assertTrue(result);
+	}
+
+	@Test
+	void validateDouble() {
+		Double valor1 = 12.565656d;
+		String answer = String.format("%.2f", valor1 / 6.93);
+		System.out.println("Formatando: " + answer);
+		String answer2 = String.valueOf(valor1 / 6.93);
+		System.out.println("Sem formatar: " + answer2);
+
+	}
+
+	@Test
+	void functionalAndImperative() {
+		List<Product> products = productService.populateList();
+
+		System.out.println(" ---- IMPERATIVE ---- ");
+		for (int i = 0; i < products.size(); i++) {
+			System.out.println(products.get(i));
+		}
+
+		System.out.println(" ---- FUNCTIONAL ---- ");
+		products.stream().forEach(product -> System.out.println(product));
+		
+	}
+
 	void twoSum() {
 		// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 		// You may assume that each input would have exactly one solution, and you may not use the same element twice.
