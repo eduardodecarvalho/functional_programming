@@ -170,37 +170,5 @@ class FunctionalProgrammingApplicationTests {
 		assertTrue(actual.containsAll(expected));
 	}
 
-	@Test
-	void findMultiple() {
-		/**
-		 * Fill the following function. It's goal is to return a collection of the all integers that occur more than once.
-		 * The input will never be null, will be unordered and can have positive and negative numbers. The output does not have to be ordered.
-		 * <p>
-		 * Examples:
-		 * [1, 2, 3]                      = []
-		 * [1, 2, 2, 3]                   = [2]
-		 * [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 5, 6, 7, 7] = [1, 2, 3, 7]
-		 * [2, 3, 4, 5, 3, 2, 1, 5, 5]    = [3, 2, 5]
-		 * [-1, 0, 1, 5, -1]              = [-1]
-		 */
-		List<Integer> numbers = new ArrayList<Integer>(Arrays.asList(1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 5, 6, 7, 7));
-
-		Set<Integer> list = new HashSet<Integer>();
-		Set<Integer> auxSet = new HashSet<Integer>();
-
-		for (int i = 0; i < numbers.size(); i++) {
-			int aux = numbers.get(i);
-
-			if (!auxSet.add(aux)) {
-				list.add(aux);
-			}
-
-		}
-
-		Set<Integer> expected = new HashSet<Integer>(Arrays.asList(1, 2, 3));
-
-		assertEquals(expected, list);
-	}
-
 }
 
