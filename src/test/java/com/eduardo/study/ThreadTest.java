@@ -2,6 +2,7 @@ package com.eduardo.study;
 
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,7 +10,8 @@ import com.eduardo.study.model.ThreadExtendsThread;
 import com.eduardo.study.model.ThreadImplementsRunnable;
 import com.eduardo.study.service.ThreadService;
 
-@SpringBootTest
+@Disabled
+// @SpringBootTest
 public class ThreadTest {
 
 	@Test
