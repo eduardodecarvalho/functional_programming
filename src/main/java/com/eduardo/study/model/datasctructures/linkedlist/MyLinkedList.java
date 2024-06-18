@@ -1,7 +1,7 @@
 package com.eduardo.study.model.datasctructures.linkedlist;
 
 public class MyLinkedList {
-    private MyNode haed;
+    private MyNode head;
     private MyNode tail;
     private int lenght;
 
@@ -10,17 +10,47 @@ public class MyLinkedList {
 
     public MyLinkedList(int value) {
         var newNode = new MyNode(value);
-        this.haed = newNode;
+        this.head = newNode;
         this.tail = newNode;
-        this.lenght = 1;
+        lenght = 1;
     }
 
-    public MyNode getHaed() {
-        return haed;
+    public void append(int value) {
+        var newNode = new MyNode(value);
+        if (lenght == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.setNext(newNode);
+        }
+        lenght++;
     }
 
-    public void setHaed(MyNode haed) {
-        this.haed = haed;
+    public MyNode removeLast() {
+        if (lenght == 0)
+            return null;
+        var pre = head;
+        var temp = head;
+        while (temp.getNext() != null) {
+            pre = temp;
+            temp = temp.getNext();
+        }
+        tail = pre;
+        tail.setNext(null);
+        lenght--;
+        if (lenght == 0) {
+            head = null;
+            tail = null;
+        }
+        return tail;
+    }
+
+    public MyNode getHead() {
+        return head;
+    }
+
+    public void setHead(MyNode head) {
+        this.head = head;
     }
 
     public MyNode getTail() {
