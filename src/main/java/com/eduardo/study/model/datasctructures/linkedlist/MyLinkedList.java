@@ -12,7 +12,7 @@ public class MyLinkedList {
         var newNode = new MyNode(value);
         this.head = newNode;
         this.tail = newNode;
-        lenght = 1;
+        this.lenght = 1;
     }
 
     public void append(int value) {
@@ -22,6 +22,7 @@ public class MyLinkedList {
             tail = newNode;
         } else {
             tail.setNext(newNode);
+            tail = newNode;
         }
         lenght++;
     }
@@ -43,6 +44,18 @@ public class MyLinkedList {
             tail = null;
         }
         return tail;
+    }
+
+    public void prepend(int value) {
+        var newNode = new MyNode(value);
+        if (lenght == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.setNext(head);
+            head = newNode;
+        }
+        lenght++;
     }
 
     public MyNode getHead() {
