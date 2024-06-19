@@ -46,6 +46,18 @@ public class MyLinkedList {
         return tail;
     }
 
+    public void removeFirst() {
+        if (lenght == 0)
+            return;
+        if (lenght == 1) {
+            head = null;
+            tail = null;
+        } else {
+            head = head.getNext();
+        }
+        lenght--;
+    }
+
     public void prepend(int value) {
         var newNode = new MyNode(value);
         if (lenght == 0) {

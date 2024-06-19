@@ -92,4 +92,22 @@ class LinkedListServiceTest {
                                 () -> assertEquals(value, myLinkedList.getHead().getNext().getValue()),
                                 () -> assertEquals(value * 2, myLinkedList.getTail().getValue()));
         }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 3, 5, -3, 15 })
+        void testRemoveFirst_notEmptyLinkedList(int value) {
+                var myLinkedList = new MyLinkedList(value);
+                myLinkedList.append(value * 3);
+                myLinkedList.append(value * 2);
+
+                assertAll(
+                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(myLinkedList.getHead().getValue(), value),
+                                () -> assertEquals(myLinkedList.getTail().getValue(), value * 2));
+
+                myLinkedList.removeFirst();
+                assertAll(
+                                () -> assertEquals(2, myLinkedList.getLenght()),
+                                () -> assertEquals(value * 3, myLinkedList.getHead().getValue()));
+        }
 }
