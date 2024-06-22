@@ -71,7 +71,6 @@ public class MyLinkedList {
     }
 
     public MyNode get(int index) {
-        System.out.println("Index: " + index);
         if (index > lenght)
             return null;
         var temp = head;
