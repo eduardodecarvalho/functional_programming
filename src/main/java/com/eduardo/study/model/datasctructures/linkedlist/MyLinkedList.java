@@ -70,6 +70,20 @@ public class MyLinkedList {
         lenght++;
     }
 
+    public MyNode get(int index) {
+        System.out.println("Index: " + index);
+        if (index > lenght)
+            return null;
+        var temp = head;
+        for (int i = 0; i < lenght; i++) {
+            if (i - index == 0) {
+                return temp;
+            }
+            temp = temp.getNext();
+        }
+        return null;
+    }
+
     public MyNode getHead() {
         return head;
     }
