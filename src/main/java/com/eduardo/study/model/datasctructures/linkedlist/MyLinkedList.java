@@ -112,6 +112,8 @@ public class MyLinkedList {
     }
 
     public MyNode remove(int index) {
+        if (index < 0 || index >= lenght)
+            return null;
         var previousNode = get(index - 1);
         var nextNode = get(index + 1);
         previousNode.setNext(nextNode);
