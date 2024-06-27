@@ -111,6 +111,14 @@ public class MyLinkedList {
         return true;
     }
 
+    public MyNode remove(int index) {
+        var previousNode = get(index - 1);
+        var nextNode = get(index + 1);
+        previousNode.setNext(nextNode);
+        lenght--;
+        return get(index);
+    }
+
     public MyNode getHead() {
         return head;
     }
