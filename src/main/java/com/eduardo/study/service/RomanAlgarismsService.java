@@ -33,8 +33,9 @@ public class RomanAlgarismsService {
 
         for (int i = 0; i < romanAlgarismNumber.length(); i++) {
             String actualLetter = String.valueOf(romanAlgarismNumber.charAt(i));
-            String nextLetter = i == romanAlgarismNumber.length() - 1 ? "" : String.valueOf(romanAlgarismNumber.charAt(i + 1));
-            if (StringUtils.isEmpty(nextLetter) || shouldIncrease(actualLetter, nextLetter)) {
+            String nextLetter = i == romanAlgarismNumber.length() - 1 ? ""
+                    : String.valueOf(romanAlgarismNumber.charAt(i + 1));
+            if (StringUtils.hasLength(nextLetter) || shouldIncrease(actualLetter, nextLetter)) {
                 hinduArabicNumeral += algarisms.get(actualLetter);
             } else {
                 hinduArabicNumeral -= algarisms.get(actualLetter);
@@ -44,11 +45,11 @@ public class RomanAlgarismsService {
     }
 
     private void validationLetters(String romanAlgarismNumber) throws Exception {
-        String invalidLetters = "";
+        var invalidLetters = new StringBuilder();
         for (int i = 0; i < romanAlgarismNumber.length(); i++) {
             String actualLetter = String.valueOf(romanAlgarismNumber.charAt(i));
             if (algarisms.get(actualLetter) == null) {
-                invalidLetters += actualLetter;
+                invalidLetters.append(actualLetter);
             }
         }
         if (!invalidLetters.isEmpty()) {

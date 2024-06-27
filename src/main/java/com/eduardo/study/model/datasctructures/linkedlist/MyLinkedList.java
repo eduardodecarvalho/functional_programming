@@ -1,7 +1,5 @@
 package com.eduardo.study.model.datasctructures.linkedlist;
 
-import org.springframework.util.ObjectUtils;
-
 public class MyLinkedList {
     private MyNode head;
     private MyNode tail;
@@ -92,6 +90,25 @@ public class MyLinkedList {
             return true;
         }
         return false;
+    }
+
+    public boolean insert(int index, int value) {
+        if (index < 0 || index > lenght)
+            return false;
+        if (index == 0) {
+            prepend(value);
+            return true;
+        }
+        if (index == lenght) {
+            append(value);
+            return true;
+        }
+        var temp = get(index - 1);
+        var newNode = new MyNode(value);
+        newNode.setNext(temp.getNext());
+        temp.setNext(newNode);
+        lenght++;
+        return true;
     }
 
     public MyNode getHead() {
