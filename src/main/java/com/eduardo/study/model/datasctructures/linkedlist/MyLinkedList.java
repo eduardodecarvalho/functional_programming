@@ -111,14 +111,17 @@ public class MyLinkedList {
         return true;
     }
 
-    public MyNode remove(int index) {
-        if (index < 0 || index >= lenght)
-            return null;
+    public void remove(int index) {
+        if (index < 0 || index > lenght)
+            return;
+        if (index == 0)
+            removeFirst();
+        if (index == lenght)
+            removeLast();
         var previousNode = get(index - 1);
         var nextNode = get(index + 1);
         previousNode.setNext(nextNode);
         lenght--;
-        return get(index);
     }
 
     public MyNode getHead() {
