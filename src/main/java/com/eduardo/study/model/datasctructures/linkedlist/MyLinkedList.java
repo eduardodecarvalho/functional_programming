@@ -124,6 +124,20 @@ public class MyLinkedList {
         lenght--;
     }
 
+    public void reverse() {
+        var temp = head;
+        var afterTemp = head.getNext();
+        MyNode beforeTemp = null;
+        head = tail;
+        tail = head;
+        for (int i = 0; i < lenght; i++) {
+            afterTemp = temp.getNext();
+            temp.setNext(beforeTemp);
+            beforeTemp = temp;
+            temp = afterTemp;
+        }
+    }
+
     public MyNode getHead() {
         return head;
     }
