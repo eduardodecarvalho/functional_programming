@@ -219,4 +219,32 @@ class LinkedListServiceTest {
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value));
         }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 3, 5, -3, 15 })
+        void testFindMiddleNode_notEmptyLinkedList(int value) {
+                var myLinkedList = new MyLinkedList(value);
+                myLinkedList.append(value * 2);
+                myLinkedList.append(value * 3);
+
+                assertAll(
+                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 2));
+
+                myLinkedList.append(value * 4);
+
+                assertAll(
+                                () -> assertEquals(4, myLinkedList.getLenght()),
+                                () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 3));
+
+                myLinkedList.append(value * 5);
+                assertAll(
+                                () -> assertEquals(5, myLinkedList.getLenght()),
+                                () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 3));
+
+                myLinkedList.append(value * 6);
+                assertAll(
+                                () -> assertEquals(6, myLinkedList.getLenght()),
+                                () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 4));
+        }
 }

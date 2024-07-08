@@ -126,16 +126,27 @@ public class MyLinkedList {
 
     public void reverse() {
         var temp = head;
-        var afterTemp = head.getNext();
         MyNode beforeTemp = null;
         head = tail;
-        tail = head;
+        tail = temp;
         for (int i = 0; i < lenght; i++) {
-            afterTemp = temp.getNext();
+            var afterTemp = temp.getNext();
             temp.setNext(beforeTemp);
             beforeTemp = temp;
             temp = afterTemp;
         }
+    }
+
+    public MyNode findMiddleNode() {
+        var slow = head;
+        var fast = head;
+
+        while (fast != null && fast.getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+
+        return slow;
     }
 
     public MyNode getHead() {
