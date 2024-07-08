@@ -149,6 +149,25 @@ public class MyLinkedList {
         return slow;
     }
 
+    public MyNode findKthFromEnd(int k) {
+        var slow = head;
+        var fast = head;
+
+        for (int i = 0; i < k; i++) {
+            if (fast == null) {
+                return null;
+            }
+            fast = fast.getNext();
+        }
+
+        while (fast != null) {
+            slow = slow.getNext();
+            fast = fast.getNext();
+        }
+
+        return slow;
+    }
+
     public MyNode getHead() {
         return head;
     }
