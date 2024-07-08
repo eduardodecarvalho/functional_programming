@@ -181,6 +181,7 @@ public class MyLinkedList {
                 length--;
             } else {
                 values.add(current.getValue());
+                tail = current;
                 previous = current;
             }
             current = current.getNext();

@@ -279,6 +279,7 @@ class LinkedListServiceTest {
                 myLinkedList.removeDuplicates();
                 assertAll(
                                 () -> assertEquals(3, myLinkedList.getLength()),
-                                () -> assertEquals(myLinkedList.getHead().getValue(), value));
+                                () -> assertEquals(myLinkedList.getHead().getValue(), value),
+                                () -> assertEquals(myLinkedList.getTail().getValue(), value * 3));
         }
 }
