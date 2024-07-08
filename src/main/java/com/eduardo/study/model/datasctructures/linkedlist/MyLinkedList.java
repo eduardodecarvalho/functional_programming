@@ -1,9 +1,12 @@
 package com.eduardo.study.model.datasctructures.linkedlist;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MyLinkedList {
     private MyNode head;
     private MyNode tail;
-    private int lenght;
+    private int length;
 
     public MyLinkedList() {
     }
@@ -12,23 +15,23 @@ public class MyLinkedList {
         var newNode = new MyNode(value);
         this.head = newNode;
         this.tail = newNode;
-        this.lenght = 1;
+        this.length = 1;
     }
 
     public void append(int value) {
         var newNode = new MyNode(value);
-        if (lenght == 0) {
+        if (length == 0) {
             head = newNode;
             tail = newNode;
         } else {
             tail.setNext(newNode);
             tail = newNode;
         }
-        lenght++;
+        length++;
     }
 
     public MyNode removeLast() {
-        if (lenght == 0)
+        if (length == 0)
             return null;
         var pre = head;
         var temp = head;
@@ -38,8 +41,8 @@ public class MyLinkedList {
         }
         tail = pre;
         tail.setNext(null);
-        lenght--;
-        if (lenght == 0) {
+        length--;
+        if (length == 0) {
             head = null;
             tail = null;
         }
@@ -47,34 +50,34 @@ public class MyLinkedList {
     }
 
     public void removeFirst() {
-        if (lenght == 0)
+        if (length == 0)
             return;
-        if (lenght == 1) {
+        if (length == 1) {
             head = null;
             tail = null;
         } else {
             head = head.getNext();
         }
-        lenght--;
+        length--;
     }
 
     public void prepend(int value) {
         var newNode = new MyNode(value);
-        if (lenght == 0) {
+        if (length == 0) {
             head = newNode;
             tail = newNode;
         } else {
             newNode.setNext(head);
             head = newNode;
         }
-        lenght++;
+        length++;
     }
 
     public MyNode get(int index) {
-        if (index > lenght || index < 0)
+        if (index > length || index < 0)
             return null;
         var temp = head;
-        for (int i = 0; i < lenght; i++) {
+        for (int i = 0; i < length; i++) {
             if (i == index) {
                 return temp;
             }
@@ -93,13 +96,13 @@ public class MyLinkedList {
     }
 
     public boolean insert(int index, int value) {
-        if (index < 0 || index > lenght)
+        if (index < 0 || index > length)
             return false;
         if (index == 0) {
             prepend(value);
             return true;
         }
-        if (index == lenght) {
+        if (index == length) {
             append(value);
             return true;
         }
@@ -107,21 +110,21 @@ public class MyLinkedList {
         var newNode = new MyNode(value);
         newNode.setNext(temp.getNext());
         temp.setNext(newNode);
-        lenght++;
+        length++;
         return true;
     }
 
     public void remove(int index) {
-        if (index < 0 || index > lenght)
+        if (index < 0 || index > length)
             return;
         if (index == 0)
             removeFirst();
-        if (index == lenght)
+        if (index == length)
             removeLast();
         var previousNode = get(index - 1);
         var nextNode = get(index + 1);
         previousNode.setNext(nextNode);
-        lenght--;
+        length--;
     }
 
     public void reverse() {
@@ -129,7 +132,7 @@ public class MyLinkedList {
         MyNode beforeTemp = null;
         head = tail;
         tail = temp;
-        for (int i = 0; i < lenght; i++) {
+        for (int i = 0; i < length; i++) {
             var afterTemp = temp.getNext();
             temp.setNext(beforeTemp);
             beforeTemp = temp;
@@ -168,6 +171,22 @@ public class MyLinkedList {
         return slow;
     }
 
+    public void removeDuplicates() {
+        Set<Integer> values = new HashSet<>();
+        MyNode previous = null;
+        var current = head;
+        while (current != null) {
+            if (values.contains(current.getValue())) {
+                previous.setNext(current.getNext());
+                length--;
+            } else {
+                values.add(current.getValue());
+                previous = current;
+            }
+            current = current.getNext();
+        }
+    }
+
     public MyNode getHead() {
         return head;
     }
@@ -184,12 +203,12 @@ public class MyLinkedList {
         this.tail = tail;
     }
 
-    public int getLenght() {
-        return lenght;
+    public int getLength() {
+        return length;
     }
 
-    public void setLenght(int lenght) {
-        this.lenght = lenght;
+    public void setLength(int lenght) {
+        this.length = lenght;
     }
 
 }

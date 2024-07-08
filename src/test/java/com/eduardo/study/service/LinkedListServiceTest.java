@@ -17,7 +17,7 @@ class LinkedListServiceTest {
                 myLinkedList.append(value);
 
                 assertAll(
-                                () -> assertEquals(1, myLinkedList.getLenght()),
+                                () -> assertEquals(1, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.getHead().getValue(), value),
                                 () -> assertEquals(myLinkedList.getTail().getValue(), value));
         }
@@ -30,7 +30,7 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(2, myLinkedList.getLenght()),
+                                () -> assertEquals(2, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.getHead().getValue(), value),
                                 () -> assertEquals(myLinkedList.getTail().getValue(), value * 2));
         }
@@ -42,14 +42,14 @@ class LinkedListServiceTest {
                 myLinkedList.append(value);
 
                 assertAll(
-                                () -> assertEquals(1, myLinkedList.getLenght()),
+                                () -> assertEquals(1, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.getHead().getValue(), value),
                                 () -> assertEquals(myLinkedList.getTail().getValue(), value));
 
                 var last = myLinkedList.removeLast();
 
                 assertAll(
-                                () -> assertEquals(0, myLinkedList.getLenght()),
+                                () -> assertEquals(0, myLinkedList.getLength()),
                                 () -> assertEquals(null, myLinkedList.getHead()),
                                 () -> assertEquals(null, last));
         }
@@ -61,14 +61,14 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(2, myLinkedList.getLenght()),
+                                () -> assertEquals(2, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.getHead().getValue(), value),
                                 () -> assertEquals(myLinkedList.getTail().getValue(), value * 2));
 
                 var last = myLinkedList.removeLast();
 
                 assertAll(
-                                () -> assertEquals(1, myLinkedList.getLenght()),
+                                () -> assertEquals(1, myLinkedList.getLength()),
                                 () -> assertEquals(value, myLinkedList.getHead().getValue()),
                                 () -> assertEquals(value, last.getValue()));
         }
@@ -80,14 +80,14 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(2, myLinkedList.getLenght()),
+                                () -> assertEquals(2, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.getHead().getValue(), value),
                                 () -> assertEquals(myLinkedList.getTail().getValue(), value * 2));
 
                 myLinkedList.prepend(value * 3);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(value * 3, myLinkedList.getHead().getValue()),
                                 () -> assertEquals(value, myLinkedList.getHead().getNext().getValue()),
                                 () -> assertEquals(value * 2, myLinkedList.getTail().getValue()));
@@ -101,13 +101,13 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.getHead().getValue(), value),
                                 () -> assertEquals(myLinkedList.getTail().getValue(), value * 2));
 
                 myLinkedList.removeFirst();
                 assertAll(
-                                () -> assertEquals(2, myLinkedList.getLenght()),
+                                () -> assertEquals(2, myLinkedList.getLength()),
                                 () -> assertEquals(value * 3, myLinkedList.getHead().getValue()));
         }
 
@@ -119,7 +119,7 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 2));
@@ -133,14 +133,14 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 2));
 
                 myLinkedList.set(0, value * 4);
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value * 4),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 2));
@@ -154,14 +154,14 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 2));
 
                 myLinkedList.insert(1, value * 4);
                 assertAll(
-                                () -> assertEquals(4, myLinkedList.getLenght()),
+                                () -> assertEquals(4, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 4),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 3),
@@ -170,7 +170,7 @@ class LinkedListServiceTest {
                 myLinkedList.insert(0, value * 5);
 
                 assertAll(
-                                () -> assertEquals(5, myLinkedList.getLenght()),
+                                () -> assertEquals(5, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value * 5),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 4),
@@ -187,14 +187,14 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 2));
 
                 myLinkedList.remove(1);
                 assertAll(
-                                () -> assertEquals(2, myLinkedList.getLenght()),
+                                () -> assertEquals(2, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 2));
         }
@@ -207,14 +207,14 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 2);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value * 2));
 
                 myLinkedList.reverse();
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.get(0).getValue(), value * 2),
                                 () -> assertEquals(myLinkedList.get(1).getValue(), value * 3),
                                 () -> assertEquals(myLinkedList.get(2).getValue(), value));
@@ -228,23 +228,23 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 3);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 2));
 
                 myLinkedList.append(value * 4);
 
                 assertAll(
-                                () -> assertEquals(4, myLinkedList.getLenght()),
+                                () -> assertEquals(4, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 3));
 
                 myLinkedList.append(value * 5);
                 assertAll(
-                                () -> assertEquals(5, myLinkedList.getLenght()),
+                                () -> assertEquals(5, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 3));
 
                 myLinkedList.append(value * 6);
                 assertAll(
-                                () -> assertEquals(6, myLinkedList.getLenght()),
+                                () -> assertEquals(6, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.findMiddleNode().getValue(), value * 4));
         }
 
@@ -256,10 +256,29 @@ class LinkedListServiceTest {
                 myLinkedList.append(value * 3);
 
                 assertAll(
-                                () -> assertEquals(3, myLinkedList.getLenght()),
+                                () -> assertEquals(3, myLinkedList.getLength()),
                                 () -> assertEquals(myLinkedList.findKthFromEnd(1), myLinkedList.getTail()),
                                 () -> assertEquals(myLinkedList.findKthFromEnd(3), myLinkedList.getHead()),
                                 () -> assertEquals(myLinkedList.findKthFromEnd(2).getValue(),
                                                 myLinkedList.get(1).getValue()));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1 })
+        void testRemoveDuplicates_notEmptyLinkedList(int value) {
+                var myLinkedList = new MyLinkedList(value);
+                myLinkedList.append(value * 2);
+                myLinkedList.append(value * 3);
+                myLinkedList.append(value * 2);
+
+                assertAll(
+                                () -> assertEquals(4, myLinkedList.getLength()),
+                                () -> assertEquals(myLinkedList.getHead().getValue(), value),
+                                () -> assertEquals(myLinkedList.getTail().getValue(), value * 2));
+
+                myLinkedList.removeDuplicates();
+                assertAll(
+                                () -> assertEquals(3, myLinkedList.getLength()),
+                                () -> assertEquals(myLinkedList.getHead().getValue(), value));
         }
 }
