@@ -3,6 +3,8 @@ package com.eduardo.study.model.datasctructures.linkedlist;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.eduardo.study.model.datasctructures.MyNode;
+
 public class MyLinkedList {
     private MyNode head;
     private MyNode tail;
