@@ -12,7 +12,7 @@ public class RomanAlgarismsService {
      * Transform any roman algarisms in hindu arabic numerals.
      */
 
-    private static final HashMap<String, Integer> algarisms = new HashMap<String, Integer>();
+    private static final HashMap<String, Integer> algarisms = new HashMap<>();
 
     static {
         algarisms.put("I", 1);
@@ -27,14 +27,14 @@ public class RomanAlgarismsService {
     public Integer transformRomanAlgarismToHinduArabic(String romanAlgarismNumber) throws Exception {
         Integer hinduArabicNumeral = 0;
 
-        romanAlgarismNumber.toUpperCase();
+        String toUpperCase = romanAlgarismNumber.toUpperCase();
 
-        validationLetters(romanAlgarismNumber);
+        validationLetters(toUpperCase);
 
-        for (int i = 0; i < romanAlgarismNumber.length(); i++) {
-            String actualLetter = String.valueOf(romanAlgarismNumber.charAt(i));
-            String nextLetter = i == romanAlgarismNumber.length() - 1 ? ""
-                    : String.valueOf(romanAlgarismNumber.charAt(i + 1));
+        for (int i = 0; i < toUpperCase.length(); i++) {
+            String actualLetter = String.valueOf(toUpperCase.charAt(i));
+            String nextLetter = i == toUpperCase.length() - 1 ? ""
+                    : String.valueOf(toUpperCase.charAt(i + 1));
             if (StringUtils.hasLength(nextLetter) || shouldIncrease(actualLetter, nextLetter)) {
                 hinduArabicNumeral += algarisms.get(actualLetter);
             } else {
