@@ -22,11 +22,27 @@ public class MyDoubleLinkedList {
         if (lenght == 0) {
             this.head = newNode;
             this.tail = newNode;
+            head.setNext(tail);
+            tail.setPrevious(head);
         } else {
             tail.setNext(newNode);
             newNode.setPrevious(tail);
             tail = newNode;
         }
         lenght++;
+    }
+
+    public void removeLast() {
+        if (lenght == 0) {
+            return;
+        }
+        if (lenght == 1) {
+            head = null;
+            tail = null;
+        } else {
+            tail.getPrevious().setNext(null);
+            tail = tail.getPrevious();
+        }
+        lenght--;
     }
 }
