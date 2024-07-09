@@ -23,9 +23,8 @@ public class MyDoubleLinkedList {
             this.head = newNode;
             this.tail = newNode;
         } else {
-            var previous = tail;
-            previous.setNext(newNode);
-            newNode.setPrevious(previous);
+            tail.setNext(newNode);
+            newNode.setPrevious(tail);
             tail = newNode;
         }
         lenght++;
