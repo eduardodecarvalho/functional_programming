@@ -58,4 +58,19 @@ public class MyDoubleLinkedList {
         }
         lenght++;
     }
+
+    public void removeFirst() {
+        if (lenght == 0) {
+            return;
+        }
+        if (lenght == 1) {
+            head = null;
+            tail = null;
+        } else {
+            var next = head.getNext();
+            next.setPrevious(null);
+            head = next;
+        }
+        lenght--;
+    }
 }

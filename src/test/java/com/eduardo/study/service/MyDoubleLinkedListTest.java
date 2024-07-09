@@ -100,4 +100,52 @@ class MyDoubleLinkedListTest {
                 () -> assertEquals(myDLL.head.getValue(), value),
                 () -> assertEquals(myDLL.tail.getValue(), value));
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 3, 5, -3, 15 })
+    void testRemoveFirst_oneElementList(int value) {
+        var myDLL = new MyDoubleLinkedList(value);
+
+        assertAll(() -> assertEquals(1, myDLL.lenght),
+                () -> assertEquals(myDLL.head, myDLL.tail),
+                () -> assertEquals(myDLL.head.getValue(), value),
+                () -> assertEquals(myDLL.tail.getValue(), value));
+
+        myDLL.removeFirst();
+        assertAll(() -> assertEquals(0, myDLL.lenght),
+                () -> assertEquals(null, myDLL.head),
+                () -> assertEquals(null, myDLL.tail));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 3, 5, -3, 15 })
+    void testRemoveFirst_moreThanOneElementList(int value) {
+        var myDLL = new MyDoubleLinkedList(value);
+        myDLL.append(value * 2);
+        myDLL.append(value * 3);
+
+        assertAll(() -> assertEquals(3, myDLL.lenght),
+                () -> assertEquals(myDLL.head.getValue(), value),
+                () -> assertEquals(myDLL.head.getNext().getValue(), value * 2),
+                () -> assertEquals(null, myDLL.head.getPrevious()),
+                () -> assertEquals(myDLL.tail.getValue(), value * 3));
+
+        myDLL.removeFirst();
+        assertAll(() -> assertEquals(2, myDLL.lenght),
+                () -> assertEquals(value * 2, myDLL.head.getValue()),
+                () -> assertEquals(myDLL.head.getNext().getValue(), value * 3),
+                () -> assertEquals(null, myDLL.head.getPrevious()),
+                () -> assertEquals(value * 3, myDLL.tail.getValue()));
+
+        myDLL.removeFirst();
+        assertAll(() -> assertEquals(1, myDLL.lenght),
+                () -> assertEquals(value * 3, myDLL.head.getValue()),
+                () -> assertEquals(null, myDLL.head.getNext()),
+                () -> assertEquals(value * 3, myDLL.tail.getValue()));
+
+        myDLL.removeFirst();
+        assertAll(() -> assertEquals(0, myDLL.lenght),
+                () -> assertEquals(null, myDLL.head),
+                () -> assertEquals(null, myDLL.tail));
+    }
 }
