@@ -45,4 +45,17 @@ public class MyDoubleLinkedList {
         }
         lenght--;
     }
+
+    public void prepend(int value) {
+        var newNode = new MyNode(value);
+        if (lenght == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            head.setPrevious(newNode);
+            newNode.setNext(head);
+            head = newNode;
+        }
+        lenght++;
+    }
 }

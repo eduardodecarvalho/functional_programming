@@ -71,4 +71,33 @@ class MyDoubleLinkedListTest {
                 () -> assertEquals(myDLL.tail.getPrevious().getValue(), value),
                 () -> assertEquals(null, myDLL.tail.getNext()));
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 3, 5, -3, 15 })
+    void testPrepend_notEmptyList(int value) {
+        var myDLL = new MyDoubleLinkedList(value);
+        myDLL.append(value * 2);
+        myDLL.append(value * 3);
+
+        assertAll(() -> assertEquals(3, myDLL.lenght),
+                () -> assertNotEquals(myDLL.head, myDLL.tail),
+                () -> assertEquals(myDLL.head.getValue(), value),
+                () -> assertEquals(myDLL.tail.getValue(), value * 3));
+
+        myDLL.prepend(value * 4);
+        assertAll(() -> assertEquals(4, myDLL.lenght),
+                () -> assertEquals(myDLL.head.getValue(), value * 4));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 3, 5, -3, 15 })
+    void testPrepend_emptyList(int value) {
+        var myDLL = new MyDoubleLinkedList();
+        myDLL.prepend(value);
+
+        assertAll(() -> assertEquals(1, myDLL.lenght),
+                () -> assertEquals(myDLL.head, myDLL.tail),
+                () -> assertEquals(myDLL.head.getValue(), value),
+                () -> assertEquals(myDLL.tail.getValue(), value));
+    }
 }
