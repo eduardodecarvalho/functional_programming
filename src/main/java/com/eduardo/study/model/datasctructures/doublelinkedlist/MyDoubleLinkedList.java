@@ -137,6 +137,8 @@ public class MyDoubleLinkedList {
     var next = toRemove.getNext();
     previous.setNext(next);
     next.setPrevious(previous);
+    toRemove.setPrevious(null);
+    toRemove.setNext(null);
 
     lenght--;
     return true;
