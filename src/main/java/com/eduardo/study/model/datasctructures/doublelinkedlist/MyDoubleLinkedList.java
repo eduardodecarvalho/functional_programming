@@ -106,19 +106,14 @@ public class MyDoubleLinkedList {
     } else if (index == lenght) {
       append(value);
     } else {
-      var actual = head;
-      int i = 0;
-      while (actual != null) {
-        if (i == index) {
-          var newNode = new MyNode(value);
-          var previous = actual.getPrevious();
-          previous.setNext(newNode);
-          actual.setPrevious(newNode);
-          newNode.setNext(actual);
-          newNode.setPrevious(previous);
-        }
-        i++;
-      }
+      var newNode = new MyNode(value);
+      var after = get(index);
+      var previous = after.getPrevious();
+      previous.setNext(newNode);
+      after.setPrevious(newNode);
+      newNode.setNext(after);
+      newNode.setPrevious(previous);
+
       lenght++;
     }
     return true;
