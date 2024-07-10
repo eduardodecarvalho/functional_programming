@@ -32,9 +32,9 @@ public class MyDoubleLinkedList {
     lenght++;
   }
 
-  public void removeLast() {
+  public boolean removeLast() {
     if (lenght == 0) {
-      return;
+      return false;
     }
     if (lenght == 1) {
       head = null;
@@ -44,6 +44,7 @@ public class MyDoubleLinkedList {
       tail = tail.getPrevious();
     }
     lenght--;
+    return true;
   }
 
   public void prepend(int value) {
@@ -59,9 +60,9 @@ public class MyDoubleLinkedList {
     lenght++;
   }
 
-  public void removeFirst() {
+  public boolean removeFirst() {
     if (lenght == 0) {
-      return;
+      return false;
     }
     if (lenght == 1) {
       head = null;
@@ -72,6 +73,7 @@ public class MyDoubleLinkedList {
       head = next;
     }
     lenght--;
+    return true;
   }
 
   public MyNode get(int index) {
@@ -118,6 +120,26 @@ public class MyDoubleLinkedList {
     }
     return true;
 
+  }
+
+  public boolean remove(int index) {
+    if (index >= lenght || index < 0) {
+      return false;
+    }
+    if (index == 0) {
+      return removeFirst();
+    }
+    if (index == lenght - 1) {
+      return removeLast();
+    }
+    var toRemove = get(index);
+    var previous = toRemove.getPrevious();
+    var next = toRemove.getNext();
+    previous.setNext(next);
+    next.setPrevious(previous);
+
+    lenght--;
+    return true;
   }
 
 }

@@ -181,7 +181,7 @@ class MyDoubleLinkedListTest {
                 myDLL.append(value * 2);
                 myDLL.append(value * 3);
 
-                boolean biggerThanLenght = myDLL.set(99, value * 4);
+                boolean biggerThanLenght = myDLL.set(myDLL.lenght + 1, value * 4);
                 boolean invalidLenght = myDLL.set(-1, value * 4);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
                                 () -> assertEquals(myDLL.get(0).getValue(), value),
@@ -233,5 +233,35 @@ class MyDoubleLinkedListTest {
                                 () -> assertEquals(myDLL.get(1).getValue(), value),
                                 () -> assertEquals(myDLL.get(2).getValue(), value * 3),
                                 () -> assertEquals(myDLL.tail.getValue(), value * 3));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 3, 5, -3, 15 })
+        void testRemove_emptyList(int value) {
+                var myDLL = new MyDoubleLinkedList(value);
+                myDLL.append(value * 2);
+                myDLL.append(value * 3);
+                myDLL.append(value * 4);
+                myDLL.append(value * 5);
+
+                assertAll(() -> assertEquals(5, myDLL.lenght));
+
+                myDLL.remove(0);
+                assertAll(() -> assertEquals(4, myDLL.lenght),
+                                () -> assertEquals(myDLL.head.getValue(), value * 2),
+                                () -> assertEquals(myDLL.get(1).getValue(), value * 3),
+                                () -> assertEquals(myDLL.get(2).getValue(), value * 4));
+
+                myDLL.remove(1);
+                assertAll(() -> assertEquals(3, myDLL.lenght),
+                                () -> assertEquals(myDLL.get(1).getValue(), value * 4));
+
+                boolean equalsToLenght = myDLL.remove(myDLL.lenght);
+                boolean invalidLenght = myDLL.remove(-1);
+                assertAll(() -> assertEquals(3, myDLL.lenght),
+                                () -> assertEquals(myDLL.tail.getValue(), value * 5),
+                                () -> assertFalse(equalsToLenght),
+                                () -> assertFalse(invalidLenght));
+
         }
 }
