@@ -3,90 +3,127 @@ package com.eduardo.study.model.datasctructures.doublelinkedlist;
 import com.eduardo.study.model.datasctructures.MyNode;
 
 public class MyDoubleLinkedList {
-    public MyNode head;
-    public MyNode tail;
-    public int lenght;
+  public MyNode head;
+  public MyNode tail;
+  public int lenght;
 
-    public MyDoubleLinkedList() {
-    }
+  public MyDoubleLinkedList() {
+  }
 
-    public MyDoubleLinkedList(int value) {
-        var newNode = new MyNode(value);
-        this.head = newNode;
-        this.tail = newNode;
-        this.lenght = 1;
-    }
+  public MyDoubleLinkedList(int value) {
+    var newNode = new MyNode(value);
+    this.head = newNode;
+    this.tail = newNode;
+    this.lenght = 1;
+  }
 
-    public void append(int value) {
-        var newNode = new MyNode(value);
-        if (lenght == 0) {
-            this.head = newNode;
-            this.tail = newNode;
-            head.setNext(tail);
-            tail.setPrevious(head);
-        } else {
-            tail.setNext(newNode);
-            newNode.setPrevious(tail);
-            tail = newNode;
-        }
-        lenght++;
+  public void append(int value) {
+    var newNode = new MyNode(value);
+    if (lenght == 0) {
+      this.head = newNode;
+      this.tail = newNode;
+      head.setNext(tail);
+      tail.setPrevious(head);
+    } else {
+      tail.setNext(newNode);
+      newNode.setPrevious(tail);
+      tail = newNode;
     }
+    lenght++;
+  }
 
-    public void removeLast() {
-        if (lenght == 0) {
-            return;
-        }
-        if (lenght == 1) {
-            head = null;
-            tail = null;
-        } else {
-            tail.getPrevious().setNext(null);
-            tail = tail.getPrevious();
-        }
-        lenght--;
+  public void removeLast() {
+    if (lenght == 0) {
+      return;
     }
+    if (lenght == 1) {
+      head = null;
+      tail = null;
+    } else {
+      tail.getPrevious().setNext(null);
+      tail = tail.getPrevious();
+    }
+    lenght--;
+  }
 
-    public void prepend(int value) {
-        var newNode = new MyNode(value);
-        if (lenght == 0) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            head.setPrevious(newNode);
-            newNode.setNext(head);
-            head = newNode;
-        }
-        lenght++;
+  public void prepend(int value) {
+    var newNode = new MyNode(value);
+    if (lenght == 0) {
+      head = newNode;
+      tail = newNode;
+    } else {
+      head.setPrevious(newNode);
+      newNode.setNext(head);
+      head = newNode;
     }
+    lenght++;
+  }
 
-    public void removeFirst() {
-        if (lenght == 0) {
-            return;
-        }
-        if (lenght == 1) {
-            head = null;
-            tail = null;
-        } else {
-            var next = head.getNext();
-            next.setPrevious(null);
-            head = next;
-        }
-        lenght--;
+  public void removeFirst() {
+    if (lenght == 0) {
+      return;
     }
+    if (lenght == 1) {
+      head = null;
+      tail = null;
+    } else {
+      var next = head.getNext();
+      next.setPrevious(null);
+      head = next;
+    }
+    lenght--;
+  }
 
-    public MyNode get(int index) {
-        if (index > lenght || index < 0) {
-            return null;
-        }
-        var actual = head;
-        int i = 0;
-        while (actual != null) {
-            if (i == index) {
-                return actual;
-            }
-            actual = actual.getNext();
-            i++;
-        }
-        return null;
+  public MyNode get(int index) {
+    if (index > lenght || index < 0) {
+      return null;
     }
+    var actual = head;
+    int i = 0;
+    while (actual != null) {
+      if (i == index) {
+        return actual;
+      }
+      actual = actual.getNext();
+      i++;
+    }
+    return null;
+  }
+
+  public boolean set(int index, int value) {
+    if (index > lenght || index < 0) {
+      return false;
+    } else {
+      var actual = get(index);
+      actual.setValue(value);
+      return true;
+    }
+  }
+
+  public boolean insert(int index, int value) {
+    if (index > lenght || index < 0) {
+      return false;
+    } else if (index == 0) {
+      prepend(value);
+    } else if (index == lenght) {
+      append(value);
+    } else {
+      var actual = head;
+      int i = 0;
+      while (actual != null) {
+        if (i == index) {
+          var newNode = new MyNode(value);
+          var previous = actual.getPrevious();
+          previous.setNext(newNode);
+          newNode.setNext(actual);
+          newNode.setPrevious(previous);
+        }
+        i++;
+      }
+      lenght++;
+    }
+    return true;
+
+  }
+
 }

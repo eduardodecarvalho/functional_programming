@@ -2,6 +2,7 @@ package com.eduardo.study.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -170,6 +171,67 @@ class MyDoubleLinkedListTest {
                                 () -> assertEquals(myDLL.get(0).getValue(), value * 3));
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(0, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0), null));
+                                () -> assertEquals(null, myDLL.get(0)));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 3, 5, -3, 15 })
+        void testSet_moreThanOneElementList(int value) {
+                var myDLL = new MyDoubleLinkedList(value);
+                myDLL.append(value * 2);
+                myDLL.append(value * 3);
+
+                boolean biggerThanLenght = myDLL.set(99, value * 4);
+                boolean invalidLenght = myDLL.set(-1, value * 4);
+                assertAll(() -> assertEquals(3, myDLL.lenght),
+                                () -> assertEquals(myDLL.get(0).getValue(), value),
+                                () -> assertEquals(myDLL.get(1).getValue(), value * 2),
+                                () -> assertEquals(myDLL.get(2).getValue(), value * 3),
+                                () -> assertFalse(biggerThanLenght),
+                                () -> assertFalse(invalidLenght));
+
+                myDLL.set(0, value * 4);
+                assertAll(() -> assertEquals(3, myDLL.lenght),
+                                () -> assertEquals(myDLL.get(0).getValue(), value * 4),
+                                () -> assertEquals(myDLL.get(1).getValue(), value * 2),
+                                () -> assertEquals(myDLL.get(2).getValue(), value * 3));
+
+                myDLL.set(1, value * 5);
+                assertAll(() -> assertEquals(3, myDLL.lenght),
+                                () -> assertEquals(myDLL.get(0).getValue(), value * 4),
+                                () -> assertEquals(myDLL.get(1).getValue(), value * 5),
+                                () -> assertEquals(myDLL.get(2).getValue(), value * 3));
+                myDLL.set(2, value * 6);
+                assertAll(() -> assertEquals(3, myDLL.lenght),
+                                () -> assertEquals(myDLL.get(0).getValue(), value * 4),
+                                () -> assertEquals(myDLL.get(1).getValue(), value * 5),
+                                () -> assertEquals(myDLL.get(2).getValue(), value * 6));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 3, 5, -3, 15 })
+        void testInsert_emptyList(int value) {
+                var myDLL = new MyDoubleLinkedList();
+                myDLL.insert(0, value);
+
+                assertAll(() -> assertEquals(1, myDLL.lenght),
+                                () -> assertEquals(myDLL.head, myDLL.tail),
+                                () -> assertEquals(myDLL.head.getValue(), value),
+                                () -> assertEquals(myDLL.tail.getValue(), value));
+
+                myDLL.insert(0, value * 2);
+                assertAll(() -> assertEquals(2, myDLL.lenght),
+                                () -> assertNotEquals(myDLL.head, myDLL.tail),
+                                () -> assertEquals(myDLL.get(0).getValue(), value * 2),
+
+                                () -> assertEquals(myDLL.get(1).getValue(), value));
+
+                myDLL.insert(2, value * 3);
+                assertAll(() -> assertEquals(3, myDLL.lenght),
+                                () -> assertNotEquals(myDLL.head, myDLL.tail),
+                                () -> assertEquals(myDLL.get(0).getValue(), value * 2),
+                                () -> assertEquals(myDLL.get(1).getValue(), value),
+                                () -> assertEquals(myDLL.get(2).getValue(), value * 3),
+                                () -> assertEquals(myDLL.tail.getValue(), value * 3));
         }
 }
