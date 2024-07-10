@@ -73,4 +73,20 @@ public class MyDoubleLinkedList {
         }
         lenght--;
     }
+
+    public MyNode get(int index) {
+        if (index > lenght || index < 0) {
+            return null;
+        }
+        var actual = head;
+        int i = 0;
+        while (actual != null) {
+            if (i == index) {
+                return actual;
+            }
+            actual = actual.getNext();
+            i++;
+        }
+        return null;
+    }
 }
