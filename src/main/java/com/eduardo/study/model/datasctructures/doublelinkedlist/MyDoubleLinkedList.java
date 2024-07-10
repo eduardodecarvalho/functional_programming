@@ -91,13 +91,11 @@ public class MyDoubleLinkedList {
   }
 
   public boolean set(int index, int value) {
-    if (index > lenght || index < 0) {
+    var node = get(index);
+    if (node == null)
       return false;
-    } else {
-      var actual = get(index);
-      actual.setValue(value);
-      return true;
-    }
+    node.setValue(value);
+    return true;
   }
 
   public boolean insert(int index, int value) {
@@ -115,6 +113,7 @@ public class MyDoubleLinkedList {
           var newNode = new MyNode(value);
           var previous = actual.getPrevious();
           previous.setNext(newNode);
+          actual.setPrevious(newNode);
           newNode.setNext(actual);
           newNode.setPrevious(previous);
         }
