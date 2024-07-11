@@ -4,7 +4,6 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.eduardo.study.model.ThreadExtendsThread;
 import com.eduardo.study.model.ThreadImplementsRunnable;
@@ -12,7 +11,7 @@ import com.eduardo.study.service.ThreadService;
 
 @Disabled
 // @SpringBootTest
-public class ThreadTest {
+class ThreadTest {
 
 	@Test
 	void workingWithThreads_extendsThread() {

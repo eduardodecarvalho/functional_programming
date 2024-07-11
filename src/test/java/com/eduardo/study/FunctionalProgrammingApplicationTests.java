@@ -32,7 +32,8 @@ class FunctionalProgrammingApplicationTests {
 
 	@Test
 	void checkPairs() {
-//		Challenge from HackerRank.:  It must return an integer representing the number of matching pairs
+		// Challenge from HackerRank.: It must return an integer representing the number
+		// of matching pairs
 
 		final List<Integer> list = Arrays.asList(1, 6, 4, 3, 7, 8, 6, 5, 1, 1, 3, 4, 5);
 
@@ -41,7 +42,6 @@ class FunctionalProgrammingApplicationTests {
 		final long result = verifyDuplicatedList.values().stream().mapToLong(v -> v / 2).sum();
 		assertEquals(5, result);
 	}
-
 
 	@Test
 	void removeIf() {
@@ -83,8 +83,8 @@ class FunctionalProgrammingApplicationTests {
 
 	@Test
 	void fibonacciSequence() {
-		Stream<Integer> s = Stream.iterate(new Integer[]{0, 1},
-				p -> new Integer[]{p[1], p[0] + p[1]}).map(p -> p[0]);
+		Stream<Integer> s = Stream.iterate(new Integer[] { 0, 1 },
+				p -> new Integer[] { p[1], p[0] + p[1] }).map(p -> p[0]);
 
 		String fibonacciSequence = "[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]";
 
@@ -137,14 +137,16 @@ class FunctionalProgrammingApplicationTests {
 
 		System.out.println(" ---- FUNCTIONAL ---- ");
 		products.stream().forEach(product -> System.out.println(product));
-		
+
 	}
 
 	void twoSum() {
-		// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-		// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+		// Given an array of integers nums and an integer target, return indices of the
+		// two numbers such that they add up to target.
+		// You may assume that each input would have exactly one solution, and you may
+		// not use the same element twice.
 		// You can return the answer in any order.
-		int[] nums = {1, 3, 5, 7};
+		int[] nums = { 1, 3, 5, 7 };
 		int target = 12;
 		List<Integer> actual = new ArrayList();
 
@@ -171,4 +173,3 @@ class FunctionalProgrammingApplicationTests {
 	}
 
 }
-
