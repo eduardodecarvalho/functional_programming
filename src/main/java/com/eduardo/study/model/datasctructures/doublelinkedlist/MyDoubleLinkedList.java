@@ -14,7 +14,13 @@ public class MyDoubleLinkedList {
     var newNode = new MyNode(value);
     this.head = newNode;
     this.tail = newNode;
-    this.lenght = 1;
+    lenght++;
+  }
+
+  public MyDoubleLinkedList(int... values) {
+    for (int value : values) {
+      append(value);
+    }
   }
 
   public void append(int value) {
@@ -141,6 +147,21 @@ public class MyDoubleLinkedList {
     toRemove.setNext(null);
 
     lenght--;
+    return true;
+  }
+
+  public boolean isPalindrome() {
+    if (lenght <= 1)
+      return true;
+    var fromHead = head;
+    var fromTail = tail;
+    while (fromHead != fromTail) {
+      if (fromHead.getValue() != fromTail.getValue()) {
+        return false;
+      }
+      fromHead = fromHead.getNext();
+      fromTail = fromTail.getPrevious();
+    }
     return true;
   }
 

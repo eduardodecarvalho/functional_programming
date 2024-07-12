@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import com.eduardo.study.model.datasctructures.doublelinkedlist.MyDoubleLinkedList;
@@ -263,5 +267,20 @@ class MyDoubleLinkedListTest {
                                 () -> assertFalse(equalsToLenght),
                                 () -> assertFalse(invalidLenght));
 
+        }
+
+        @ParameterizedTest
+        @MethodSource("isPalindromeValues")
+        void testIsPalindrome_emptyList(boolean isPalindrome, MyDoubleLinkedList myDLL) {
+                assertEquals(isPalindrome, myDLL.isPalindrome());
+        }
+
+        private static Stream<Arguments> isPalindromeValues() {
+                return Stream.of(
+                                Arguments.of(true, new MyDoubleLinkedList(1)),
+                                Arguments.of(true, new MyDoubleLinkedList(1, 2, 1)),
+                                Arguments.of(false, new MyDoubleLinkedList(1, 2, 1, 1)),
+                                Arguments.of(false, new MyDoubleLinkedList(1, 2, 3, 4, 5)),
+                                Arguments.of(true, new MyDoubleLinkedList(1, 2, 3, 2, 1)));
         }
 }

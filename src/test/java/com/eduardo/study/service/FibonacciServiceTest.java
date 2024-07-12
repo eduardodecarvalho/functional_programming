@@ -51,7 +51,7 @@ class FibonacciServiceTest {
     }
 
     @ParameterizedTest
-    @MethodSource("testGetFibonacciNumberByIndex")
+    @MethodSource()
     void testGetFibonacciNumberByIndex(Integer index, Integer value) {
 
         assertAll(
