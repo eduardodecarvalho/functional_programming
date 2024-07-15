@@ -1,11 +1,20 @@
 package com.eduardo.study.model.datasctructures.doublelinkedlist;
 
-import com.eduardo.study.model.datasctructures.MyNode;
-
 public class MyDoubleLinkedList {
   public MyNode head;
   public MyNode tail;
   public int lenght;
+
+  public class MyNode {
+    public int value;
+    public MyNode next;
+    public MyNode previous;
+
+    public MyNode(int value) {
+      this.value = value;
+    }
+
+  }
 
   public MyDoubleLinkedList() {
   }
@@ -28,11 +37,11 @@ public class MyDoubleLinkedList {
     if (lenght == 0) {
       this.head = newNode;
       this.tail = newNode;
-      head.setNext(tail);
-      tail.setPrevious(head);
+      head.next = tail;
+      tail.previous = head;
     } else {
-      tail.setNext(newNode);
-      newNode.setPrevious(tail);
+      tail.next = newNode;
+      newNode.previous = tail;
       tail = newNode;
     }
     lenght++;
@@ -46,8 +55,8 @@ public class MyDoubleLinkedList {
       head = null;
       tail = null;
     } else {
-      tail.getPrevious().setNext(null);
-      tail = tail.getPrevious();
+      tail.previous.next = null;
+      tail = tail.previous;
     }
     lenght--;
     return true;
@@ -59,8 +68,8 @@ public class MyDoubleLinkedList {
       head = newNode;
       tail = newNode;
     } else {
-      head.setPrevious(newNode);
-      newNode.setNext(head);
+      head.previous = newNode;
+      newNode.next = head;
       head = newNode;
     }
     lenght++;
@@ -74,8 +83,8 @@ public class MyDoubleLinkedList {
       head = null;
       tail = null;
     } else {
-      var next = head.getNext();
-      next.setPrevious(null);
+      var next = head.next;
+      next.previous = null;
       head = next;
     }
     lenght--;
@@ -92,7 +101,7 @@ public class MyDoubleLinkedList {
       if (i == index) {
         return actual;
       }
-      actual = actual.getNext();
+      actual = actual.next;
       i++;
     }
     return null;
@@ -102,7 +111,7 @@ public class MyDoubleLinkedList {
     var node = get(index);
     if (node == null)
       return false;
-    node.setValue(value);
+    node.value = value;
     return true;
   }
 
@@ -116,11 +125,11 @@ public class MyDoubleLinkedList {
     } else {
       var newNode = new MyNode(value);
       var after = get(index);
-      var previous = after.getPrevious();
-      previous.setNext(newNode);
-      after.setPrevious(newNode);
-      newNode.setNext(after);
-      newNode.setPrevious(previous);
+      var previous = after.previous;
+      previous.next = newNode;
+      after.previous = newNode;
+      newNode.next = after;
+      newNode.previous = previous;
 
       lenght++;
     }
@@ -139,12 +148,12 @@ public class MyDoubleLinkedList {
       return removeLast();
     }
     var toRemove = get(index);
-    var previous = toRemove.getPrevious();
-    var next = toRemove.getNext();
-    previous.setNext(next);
-    next.setPrevious(previous);
-    toRemove.setPrevious(null);
-    toRemove.setNext(null);
+    var previous = toRemove.previous;
+    var next = toRemove.next;
+    previous.next = next;
+    next.previous = previous;
+    toRemove.previous = null;
+    toRemove.next = null;
 
     lenght--;
     return true;
@@ -156,11 +165,11 @@ public class MyDoubleLinkedList {
     var fromHead = head;
     var fromTail = tail;
     while (fromHead != fromTail) {
-      if (fromHead.getValue() != fromTail.getValue()) {
+      if (fromHead.value != fromTail.value) {
         return false;
       }
-      fromHead = fromHead.getNext();
-      fromTail = fromTail.getPrevious();
+      fromHead = fromHead.next;
+      fromTail = fromTail.previous;
     }
     return true;
   }

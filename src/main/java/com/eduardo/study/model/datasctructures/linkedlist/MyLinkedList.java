@@ -3,12 +3,19 @@ package com.eduardo.study.model.datasctructures.linkedlist;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.eduardo.study.model.datasctructures.MyNode;
-
 public class MyLinkedList {
     private MyNode head;
     private MyNode tail;
     private int length;
+
+    public class MyNode {
+        public int value;
+        public MyNode next;
+
+        public MyNode(int value) {
+            this.value = value;
+        }
+    }
 
     public MyLinkedList() {
     }
@@ -26,7 +33,7 @@ public class MyLinkedList {
             head = newNode;
             tail = newNode;
         } else {
-            tail.setNext(newNode);
+            tail.next = newNode;
             tail = newNode;
         }
         length++;
@@ -37,12 +44,12 @@ public class MyLinkedList {
             return null;
         var pre = head;
         var temp = head;
-        while (temp.getNext() != null) {
+        while (temp.next != null) {
             pre = temp;
-            temp = temp.getNext();
+            temp = temp.next;
         }
         tail = pre;
-        tail.setNext(null);
+        tail.next = (null);
         length--;
         if (length == 0) {
             head = null;
@@ -58,7 +65,7 @@ public class MyLinkedList {
             head = null;
             tail = null;
         } else {
-            head = head.getNext();
+            head = head.next;
         }
         length--;
     }
@@ -69,7 +76,7 @@ public class MyLinkedList {
             head = newNode;
             tail = newNode;
         } else {
-            newNode.setNext(head);
+            newNode.next = (head);
             head = newNode;
         }
         length++;
@@ -83,7 +90,7 @@ public class MyLinkedList {
             if (i == index) {
                 return temp;
             }
-            temp = temp.getNext();
+            temp = temp.next;
         }
         return null;
     }
@@ -91,7 +98,7 @@ public class MyLinkedList {
     public boolean set(int index, int value) {
         var temp = get(index);
         if (temp != null) {
-            temp.setValue(value);
+            temp.value = value;
             return true;
         }
         return false;
@@ -110,8 +117,8 @@ public class MyLinkedList {
         }
         var temp = get(index - 1);
         var newNode = new MyNode(value);
-        newNode.setNext(temp.getNext());
-        temp.setNext(newNode);
+        newNode.next = temp.next;
+        temp.next = newNode;
         length++;
         return true;
     }
@@ -125,7 +132,7 @@ public class MyLinkedList {
             removeLast();
         var previousNode = get(index - 1);
         var nextNode = get(index + 1);
-        previousNode.setNext(nextNode);
+        previousNode.next = nextNode;
         length--;
     }
 
@@ -135,8 +142,8 @@ public class MyLinkedList {
         head = tail;
         tail = temp;
         for (int i = 0; i < length; i++) {
-            var afterTemp = temp.getNext();
-            temp.setNext(beforeTemp);
+            var afterTemp = temp.next;
+            temp.next = beforeTemp;
             beforeTemp = temp;
             temp = afterTemp;
         }
@@ -146,9 +153,9 @@ public class MyLinkedList {
         var slow = head;
         var fast = head;
 
-        while (fast != null && fast.getNext() != null) {
-            slow = slow.getNext();
-            fast = fast.getNext().getNext();
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
         return slow;
@@ -162,12 +169,12 @@ public class MyLinkedList {
             if (fast == null) {
                 return null;
             }
-            fast = fast.getNext();
+            fast = fast.next;
         }
 
         while (fast != null) {
-            slow = slow.getNext();
-            fast = fast.getNext();
+            slow = slow.next;
+            fast = fast.next;
         }
 
         return slow;
@@ -178,15 +185,15 @@ public class MyLinkedList {
         MyNode previous = null;
         var current = head;
         while (current != null) {
-            if (values.contains(current.getValue())) {
-                previous.setNext(current.getNext());
+            if (values.contains(current.value)) {
+                previous.next = (current.next);
                 length--;
             } else {
-                values.add(current.getValue());
+                values.add(current.value);
                 tail = current;
                 previous = current;
             }
-            current = current.getNext();
+            current = current.next;
         }
     }
 

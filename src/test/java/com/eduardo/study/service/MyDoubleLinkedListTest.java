@@ -23,7 +23,7 @@ class MyDoubleLinkedListTest {
                 myDLL.append(value);
                 assertAll(() -> assertEquals(1, myDLL.lenght),
                                 () -> assertEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(value, myDLL.head.getValue()));
+                                () -> assertEquals(value, myDLL.head.value));
         }
 
         @ParameterizedTest
@@ -37,8 +37,8 @@ class MyDoubleLinkedListTest {
                 myDLL.append(value * 2);
                 assertAll(() -> assertEquals(2, myDLL.lenght),
                                 () -> assertNotEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(value, myDLL.head.getValue()),
-                                () -> assertEquals(value * 2, myDLL.tail.getValue()));
+                                () -> assertEquals(value, myDLL.head.value),
+                                () -> assertEquals(value * 2, myDLL.tail.value));
         }
 
         @ParameterizedTest
@@ -48,7 +48,7 @@ class MyDoubleLinkedListTest {
                 myDLL.append(value);
                 assertAll(() -> assertEquals(1, myDLL.lenght),
                                 () -> assertEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(value, myDLL.head.getValue()));
+                                () -> assertEquals(value, myDLL.head.value));
 
                 myDLL.removeLast();
                 assertAll(() -> assertEquals(0, myDLL.lenght),
@@ -65,16 +65,16 @@ class MyDoubleLinkedListTest {
 
                 assertAll(() -> assertEquals(3, myDLL.lenght),
                                 () -> assertNotEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(myDLL.head.getValue(), value),
-                                () -> assertEquals(myDLL.tail.getValue(), value * 3));
+                                () -> assertEquals(myDLL.head.value, value),
+                                () -> assertEquals(myDLL.tail.value, value * 3));
 
                 myDLL.removeLast();
                 assertAll(() -> assertEquals(2, myDLL.lenght),
                                 () -> assertNotEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(value, myDLL.head.getValue()),
-                                () -> assertEquals(value * 2, myDLL.tail.getValue()),
-                                () -> assertEquals(myDLL.tail.getPrevious().getValue(), value),
-                                () -> assertEquals(null, myDLL.tail.getNext()));
+                                () -> assertEquals(value, myDLL.head.value),
+                                () -> assertEquals(value * 2, myDLL.tail.value),
+                                () -> assertEquals(myDLL.tail.previous.value, value),
+                                () -> assertEquals(null, myDLL.tail.next));
         }
 
         @ParameterizedTest
@@ -86,12 +86,12 @@ class MyDoubleLinkedListTest {
 
                 assertAll(() -> assertEquals(3, myDLL.lenght),
                                 () -> assertNotEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(myDLL.head.getValue(), value),
-                                () -> assertEquals(myDLL.tail.getValue(), value * 3));
+                                () -> assertEquals(myDLL.head.value, value),
+                                () -> assertEquals(myDLL.tail.value, value * 3));
 
                 myDLL.prepend(value * 4);
                 assertAll(() -> assertEquals(4, myDLL.lenght),
-                                () -> assertEquals(myDLL.head.getValue(), value * 4));
+                                () -> assertEquals(myDLL.head.value, value * 4));
         }
 
         @ParameterizedTest
@@ -102,8 +102,8 @@ class MyDoubleLinkedListTest {
 
                 assertAll(() -> assertEquals(1, myDLL.lenght),
                                 () -> assertEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(myDLL.head.getValue(), value),
-                                () -> assertEquals(myDLL.tail.getValue(), value));
+                                () -> assertEquals(myDLL.head.value, value),
+                                () -> assertEquals(myDLL.tail.value, value));
         }
 
         @ParameterizedTest
@@ -113,8 +113,8 @@ class MyDoubleLinkedListTest {
 
                 assertAll(() -> assertEquals(1, myDLL.lenght),
                                 () -> assertEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(myDLL.head.getValue(), value),
-                                () -> assertEquals(myDLL.tail.getValue(), value));
+                                () -> assertEquals(myDLL.head.value, value),
+                                () -> assertEquals(myDLL.tail.value, value));
 
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(0, myDLL.lenght),
@@ -130,23 +130,23 @@ class MyDoubleLinkedListTest {
                 myDLL.append(value * 3);
 
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.head.getValue(), value),
-                                () -> assertEquals(myDLL.head.getNext().getValue(), value * 2),
-                                () -> assertEquals(null, myDLL.head.getPrevious()),
-                                () -> assertEquals(myDLL.tail.getValue(), value * 3));
+                                () -> assertEquals(myDLL.head.value, value),
+                                () -> assertEquals(myDLL.head.next.value, value * 2),
+                                () -> assertEquals(null, myDLL.head.previous),
+                                () -> assertEquals(myDLL.tail.value, value * 3));
 
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(2, myDLL.lenght),
-                                () -> assertEquals(value * 2, myDLL.head.getValue()),
-                                () -> assertEquals(myDLL.head.getNext().getValue(), value * 3),
-                                () -> assertEquals(null, myDLL.head.getPrevious()),
-                                () -> assertEquals(value * 3, myDLL.tail.getValue()));
+                                () -> assertEquals(value * 2, myDLL.head.value),
+                                () -> assertEquals(myDLL.head.next.value, value * 3),
+                                () -> assertEquals(null, myDLL.head.previous),
+                                () -> assertEquals(value * 3, myDLL.tail.value));
 
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(1, myDLL.lenght),
-                                () -> assertEquals(value * 3, myDLL.head.getValue()),
-                                () -> assertEquals(null, myDLL.head.getNext()),
-                                () -> assertEquals(value * 3, myDLL.tail.getValue()));
+                                () -> assertEquals(value * 3, myDLL.head.value),
+                                () -> assertEquals(null, myDLL.head.next),
+                                () -> assertEquals(value * 3, myDLL.tail.value));
 
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(0, myDLL.lenght),
@@ -162,17 +162,17 @@ class MyDoubleLinkedListTest {
                 myDLL.append(value * 3);
 
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0).getValue(), value),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 2),
-                                () -> assertEquals(myDLL.get(2).getValue(), value * 3));
+                                () -> assertEquals(myDLL.get(0).value, value),
+                                () -> assertEquals(myDLL.get(1).value, value * 2),
+                                () -> assertEquals(myDLL.get(2).value, value * 3));
 
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(2, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0).getValue(), value * 2),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 3));
+                                () -> assertEquals(myDLL.get(0).value, value * 2),
+                                () -> assertEquals(myDLL.get(1).value, value * 3));
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(1, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0).getValue(), value * 3));
+                                () -> assertEquals(myDLL.get(0).value, value * 3));
                 myDLL.removeFirst();
                 assertAll(() -> assertEquals(0, myDLL.lenght),
                                 () -> assertEquals(null, myDLL.get(0)));
@@ -188,28 +188,28 @@ class MyDoubleLinkedListTest {
                 boolean biggerThanLenght = myDLL.set(myDLL.lenght + 1, value * 4);
                 boolean invalidLenght = myDLL.set(-1, value * 4);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0).getValue(), value),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 2),
-                                () -> assertEquals(myDLL.get(2).getValue(), value * 3),
+                                () -> assertEquals(myDLL.get(0).value, value),
+                                () -> assertEquals(myDLL.get(1).value, value * 2),
+                                () -> assertEquals(myDLL.get(2).value, value * 3),
                                 () -> assertFalse(biggerThanLenght),
                                 () -> assertFalse(invalidLenght));
 
                 myDLL.set(0, value * 4);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0).getValue(), value * 4),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 2),
-                                () -> assertEquals(myDLL.get(2).getValue(), value * 3));
+                                () -> assertEquals(myDLL.get(0).value, value * 4),
+                                () -> assertEquals(myDLL.get(1).value, value * 2),
+                                () -> assertEquals(myDLL.get(2).value, value * 3));
 
                 myDLL.set(1, value * 5);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0).getValue(), value * 4),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 5),
-                                () -> assertEquals(myDLL.get(2).getValue(), value * 3));
+                                () -> assertEquals(myDLL.get(0).value, value * 4),
+                                () -> assertEquals(myDLL.get(1).value, value * 5),
+                                () -> assertEquals(myDLL.get(2).value, value * 3));
                 myDLL.set(2, value * 6);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(0).getValue(), value * 4),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 5),
-                                () -> assertEquals(myDLL.get(2).getValue(), value * 6));
+                                () -> assertEquals(myDLL.get(0).value, value * 4),
+                                () -> assertEquals(myDLL.get(1).value, value * 5),
+                                () -> assertEquals(myDLL.get(2).value, value * 6));
         }
 
         @ParameterizedTest
@@ -220,23 +220,23 @@ class MyDoubleLinkedListTest {
 
                 assertAll(() -> assertEquals(1, myDLL.lenght),
                                 () -> assertEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(myDLL.head.getValue(), value),
-                                () -> assertEquals(myDLL.tail.getValue(), value));
+                                () -> assertEquals(myDLL.head.value, value),
+                                () -> assertEquals(myDLL.tail.value, value));
 
                 myDLL.insert(0, value * 2);
                 assertAll(() -> assertEquals(2, myDLL.lenght),
                                 () -> assertNotEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(myDLL.get(0).getValue(), value * 2),
+                                () -> assertEquals(myDLL.get(0).value, value * 2),
 
-                                () -> assertEquals(myDLL.get(1).getValue(), value));
+                                () -> assertEquals(myDLL.get(1).value, value));
 
                 myDLL.insert(2, value * 3);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
                                 () -> assertNotEquals(myDLL.head, myDLL.tail),
-                                () -> assertEquals(myDLL.get(0).getValue(), value * 2),
-                                () -> assertEquals(myDLL.get(1).getValue(), value),
-                                () -> assertEquals(myDLL.get(2).getValue(), value * 3),
-                                () -> assertEquals(myDLL.tail.getValue(), value * 3));
+                                () -> assertEquals(myDLL.get(0).value, value * 2),
+                                () -> assertEquals(myDLL.get(1).value, value),
+                                () -> assertEquals(myDLL.get(2).value, value * 3),
+                                () -> assertEquals(myDLL.tail.value, value * 3));
         }
 
         @ParameterizedTest
@@ -252,18 +252,18 @@ class MyDoubleLinkedListTest {
 
                 myDLL.remove(0);
                 assertAll(() -> assertEquals(4, myDLL.lenght),
-                                () -> assertEquals(myDLL.head.getValue(), value * 2),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 3),
-                                () -> assertEquals(myDLL.get(2).getValue(), value * 4));
+                                () -> assertEquals(myDLL.head.value, value * 2),
+                                () -> assertEquals(myDLL.get(1).value, value * 3),
+                                () -> assertEquals(myDLL.get(2).value, value * 4));
 
                 myDLL.remove(1);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.get(1).getValue(), value * 4));
+                                () -> assertEquals(myDLL.get(1).value, value * 4));
 
                 boolean equalsToLenght = myDLL.remove(myDLL.lenght);
                 boolean invalidLenght = myDLL.remove(-1);
                 assertAll(() -> assertEquals(3, myDLL.lenght),
-                                () -> assertEquals(myDLL.tail.getValue(), value * 5),
+                                () -> assertEquals(myDLL.tail.value, value * 5),
                                 () -> assertFalse(equalsToLenght),
                                 () -> assertFalse(invalidLenght));
 

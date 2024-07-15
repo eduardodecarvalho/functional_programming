@@ -1,7 +1,9 @@
 package com.eduardo.study;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.intThat;
 
+import java.util.HashMap;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
