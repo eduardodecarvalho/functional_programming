@@ -6,7 +6,7 @@ import org.springframework.util.StringUtils;
 import java.util.HashMap;
 
 @Service
-public class RomanAlgarismsService {
+public class RomanAlgorithmsService {
 
     /**
      * Transform any roman algarisms in hindu arabic numerals.

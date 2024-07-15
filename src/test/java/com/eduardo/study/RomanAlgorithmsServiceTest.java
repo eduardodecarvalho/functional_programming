@@ -1,6 +1,6 @@
 package com.eduardo.study;
 
-import com.eduardo.study.service.RomanAlgarismsService;
+import com.eduardo.study.service.RomanAlgorithmsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class RomanAlgarismsServiceTest {
+public class RomanAlgorithmsServiceTest {
 
     @Autowired
-    private RomanAlgarismsService romanAlgarismsService;
+    private RomanAlgorithmsService romanAlgarismsService;
 
     @Test
     void validateWith_VIII() throws Exception {
