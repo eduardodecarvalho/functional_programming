@@ -26,7 +26,6 @@ public class RomanAlgarismsServiceTest {
         assertEquals(40, actual);
     }
 
-
     @Test
     void validateWith_XC() throws Exception {
         Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("XC");

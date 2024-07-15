@@ -35,10 +35,10 @@ public class RomanAlgarismsService {
             String actualLetter = String.valueOf(toUpperCase.charAt(i));
             String nextLetter = i == toUpperCase.length() - 1 ? ""
                     : String.valueOf(toUpperCase.charAt(i + 1));
-            if (StringUtils.hasLength(nextLetter) || shouldIncrease(actualLetter, nextLetter)) {
-                hinduArabicNumeral += algarisms.get(actualLetter);
-            } else {
+            if (StringUtils.hasLength(nextLetter) && shouldDecrease(actualLetter, nextLetter)) {
                 hinduArabicNumeral -= algarisms.get(actualLetter);
+            } else {
+                hinduArabicNumeral += algarisms.get(actualLetter);
             }
         }
         return hinduArabicNumeral;
@@ -57,7 +57,7 @@ public class RomanAlgarismsService {
         }
     }
 
-    private boolean shouldIncrease(String actualLetter, String nextLetter) {
-        return algarisms.get(actualLetter) >= algarisms.get(nextLetter);
+    private boolean shouldDecrease(String actualLetter, String nextLetter) {
+        return algarisms.get(actualLetter) < algarisms.get(nextLetter);
     }
 }
