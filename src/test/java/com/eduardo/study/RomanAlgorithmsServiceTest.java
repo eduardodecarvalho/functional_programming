@@ -1,65 +1,40 @@
 package com.eduardo.study;
 
-import com.eduardo.study.service.RomanAlgorithmsService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import com.eduardo.study.service.RomanAlgorithmsService;
+
 public class RomanAlgorithmsServiceTest {
-
-    @Autowired
-    private RomanAlgorithmsService romanAlgarismsService;
-
-    @Test
-    void validateWith_VIII() throws Exception {
-        Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("VIII");
-        assertEquals(8, actual);
-    }
-
-    @Test
-    void validateWith_XL() throws Exception {
-        Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("XL");
-        assertEquals(40, actual);
-    }
-
-    @Test
-    void validateWith_XC() throws Exception {
-        Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("XC");
-        assertEquals(90, actual);
-    }
-
-    @Test
-    void validateWith_CCC() throws Exception {
-        Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("CCC");
-        assertEquals(300, actual);
-    }
-
-    @Test
-    void validateWith_CD() throws Exception {
-        Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("CD");
-        assertEquals(400, actual);
-    }
-
-    @Test
-    void validateWith_DCCC() throws Exception {
-        Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("DCCC");
-        assertEquals(800, actual);
-    }
-
-    @Test
-    void validateWith_CM() throws Exception {
-        Integer actual = romanAlgarismsService.transformRomanAlgarismToHinduArabic("CM");
-        assertEquals(900, actual);
-    }
 
     @Test()
     void validateWith_invalidLetters() {
         Assertions.assertThrows(Exception.class, () -> {
-            romanAlgarismsService.transformRomanAlgarismToHinduArabic("ABC");
+            RomanAlgorithmsService.transformRomanAlgarismToHinduArabic("ABC");
         });
+    }
+
+    @ParameterizedTest
+    @MethodSource()
+    void validateNumbers(int expected, String actual) throws Exception {
+        assertEquals(expected, RomanAlgorithmsService.transformRomanAlgarismToHinduArabic(actual));
+    }
+
+    private static Stream<Arguments> validateNumbers() {
+        return Stream.of(
+                Arguments.of(8, "VIII"),
+                Arguments.of(40, "XL"),
+                Arguments.of(90, "XC"),
+                Arguments.of(300, "CCC"),
+                Arguments.of(400, "CD"),
+                Arguments.of(800, "DCCC"),
+                Arguments.of(900, "CM"));
     }
 }
