@@ -24,10 +24,9 @@ class FunctionalProgrammingApplicationTests {
 		List<Product> products = productService.populateList();
 
 		products.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
-		products.sort((p1, p2) -> p1.getName().toUpperCase()
-				.compareTo(p2.getName().toUpperCase()));
+		products.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
 
-		assertEquals("Camera", products.get(0).getName());
+		assertEquals("Camera", products.getFirst().getName());
 	}
 
 	@Test
@@ -57,15 +56,15 @@ class FunctionalProgrammingApplicationTests {
 	void forEach() {
 		List<Product> products = productService.populateList();
 
-		products.stream().forEach(p -> p.setPrice(p.getPrice() * 1.1));
+		products.forEach(p -> p.setPrice(p.getPrice() * 1.1));
 
-		assertEquals(1100.00, products.get(0).getPrice());
+		assertEquals(1100.00, products.getFirst().getPrice());
 
-		Double totalPrice = products.stream().mapToDouble(p -> p.getPrice()).sum();
+		Double totalPrice = products.stream().mapToDouble(Product::getPrice).sum();
 
 		assertEquals(11715.000000000002, totalPrice);
 
-		products.stream().forEach(p -> p.setName(p.getName().toUpperCase()));
+		products.forEach(p -> p.setName(p.getName().toUpperCase()));
 
 		assertEquals(products.get(1).getName(), "MOUSE");
 	}
@@ -94,11 +93,8 @@ class FunctionalProgrammingApplicationTests {
 	@Test
 	void testLetters() {
 		String word = "Google";
-		boolean result = false;
+		boolean result = word.equals(word.toUpperCase());
 
-		if (word.equals(word.toUpperCase())) {
-			result = true;
-		}
 		if (word.equals(word.toLowerCase())) {
 			result = true;
 		}
@@ -118,7 +114,7 @@ class FunctionalProgrammingApplicationTests {
 
 	@Test
 	void validateDouble() {
-		Double valor1 = 12.565656d;
+		double valor1 = 12.565656d;
 		String answer = String.format("%.2f", valor1 / 6.93);
 		System.out.println("Formatando: " + answer);
 		String answer2 = String.valueOf(valor1 / 6.93);
