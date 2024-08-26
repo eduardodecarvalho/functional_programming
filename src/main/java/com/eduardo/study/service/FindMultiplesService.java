@@ -13,9 +13,7 @@ public class FindMultiplesService {
         Set<Integer> list = new HashSet<>();
         Set<Integer> auxSet = new HashSet<>();
 
-        for (int i = 0; i < numbers.size(); i++) {
-            int aux = numbers.get(i);
-
+        for (int aux : numbers) {
             if (!auxSet.add(aux)) {
                 list.add(aux);
             }
